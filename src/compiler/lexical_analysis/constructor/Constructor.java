@@ -18,10 +18,10 @@ public interface Constructor {
 	 * @param b
 	 * @return
 	 */
-	public List<Basic_word> add(Basic_word b,List<Basic_word> wordlist);
+	public List<Basic_word> add(String word);
 	/**
 	 * @param b
 	 * @return
 	 */
-	public List<Basic_word> remove(Basic_word b,List<Basic_word> wordlist);
+	public List<Basic_word> remove(String word);
 }

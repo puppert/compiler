@@ -11,7 +11,7 @@ import java.util.Properties;
  */
 public class Utils_properties {
 
-	private static Properties lexical_pro;
+	private static Properties lexical_pro = new Properties();
 	/**
 	 * get lexical properties
 	 * 

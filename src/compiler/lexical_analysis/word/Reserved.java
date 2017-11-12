@@ -1,8 +1,8 @@
 package compiler.lexical_analysis.word;
 
-public class Identifier extends Basic_word {
+public class Reserved extends Basic_word{
 	@Override
 	public void setType() {
-		this.type = 3;
+		this.type = 5;
 	}
 }
