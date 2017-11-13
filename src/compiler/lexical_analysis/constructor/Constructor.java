@@ -2,7 +2,7 @@ package compiler.lexical_analysis.constructor;
 
 import java.util.List;
 
-import compiler.lexical_analysis.word.Basic_word;
+import compiler.pojo.word.Vt.Vt_word;
 
 
 /**
@@ -13,15 +13,15 @@ public interface Constructor {
 	/**
 	 * @return
 	 */
-	public List<Basic_word> construct();
+	public List<Vt_word> construct();
 	/**
 	 * @param b
 	 * @return
 	 */
-	public List<Basic_word> add(String word);
+	public List<Vt_word> add(String word);
 	/**
 	 * @param b
 	 * @return
 	 */
-	public List<Basic_word> remove(String word);
+	public List<Vt_word> remove(String word);
 }

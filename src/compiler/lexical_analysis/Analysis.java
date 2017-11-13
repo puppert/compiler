@@ -13,28 +13,28 @@ import compiler.lexical_analysis.constructor.impl.DelimiterConstructor;
 import compiler.lexical_analysis.constructor.impl.IdentifierConstructor;
 import compiler.lexical_analysis.constructor.impl.OperationalConstructor;
 import compiler.lexical_analysis.constructor.impl.ReservedConstructor;
-import compiler.lexical_analysis.word.Basic_word;
-import compiler.lexical_analysis.word.Constant;
-import compiler.lexical_analysis.word.Delimiter;
-import compiler.lexical_analysis.word.Identifier;
-import compiler.lexical_analysis.word.Operational;
-import compiler.lexical_analysis.word.Reserved;
+import compiler.pojo.word.Vt.Vt_word;
+import compiler.pojo.word.Vt.type.Constant;
+import compiler.pojo.word.Vt.type.Delimiter;
+import compiler.pojo.word.Vt.type.Identifier;
+import compiler.pojo.word.Vt.type.Operational;
+import compiler.pojo.word.Vt.type.Reserved;
 import utils.Myutils;
 
 public class Analysis {
 	/**
-	 * all words of paragraph
+	 * all Word of paragraph
 	 */
-	public static List<Basic_word> allwords;
+	public static List<Vt_word> allWord;
 	
 	/**
 	 * 
 	 */
-	public static List<Basic_word> constants;
-	public static List<Basic_word> delimiters;
-	public static List<Basic_word> identifiers;
-	public static List<Basic_word> operationals;
-	public static List<Basic_word> reserveds;
+	public static List<Vt_word> constants;
+	public static List<Vt_word> delimiters;
+	public static List<Vt_word> identifiers;
+	public static List<Vt_word> operationals;
+	public static List<Vt_word> reserveds;
 	
 	
 	/**
@@ -53,7 +53,7 @@ public class Analysis {
 		operationals = oc.construct();
 		reserveds = rc.construct();
 		
-		allwords = new ArrayList<>();
+		allWord = new ArrayList<>();
 	}
 	
 	public Map<String,String> getAllContants(String sentence){
@@ -69,7 +69,7 @@ public class Analysis {
 			map.put(String.valueOf(start), str1);
 			if(start != end) {
 				String str2 = sentence.substring(end, start);
-				Map<Integer,String> ncmap = getAllWords(str2,end);
+				Map<Integer,String> ncmap = getAllWord(str2,end);
 				for(Integer i:ncmap.keySet()) {
 					map.put(String.valueOf(i), ncmap.get(i));
 				}
@@ -78,14 +78,14 @@ public class Analysis {
 		}
 		if(end<sentence.length()) {
 			String str3 = sentence.substring(end);
-			Map<Integer,String> ncmap = getAllWords(str3,end);
+			Map<Integer,String> ncmap = getAllWord(str3,end);
 			for(Integer i:ncmap.keySet()) {
 				map.put(String.valueOf(i), ncmap.get(i));
 			}
 		}
 		return map;
 	}
-	public Map<Integer,String> getAllWords(String sentence,int startpoint) {
+	public Map<Integer,String> getAllWord(String sentence,int startpoint) {
 		Map<Integer,String> map = new TreeMap<>();
 		String regex = "\\b[a-zA-Z_]+[a-zA-Z0-9_]*\\b";
 		Pattern pattern = Pattern.compile(regex);
@@ -98,10 +98,10 @@ public class Analysis {
 			map.put(start+startpoint, str1);
 			if(start != end) {
 				String str2 = sentence.substring(end, start);
-				for(Basic_word b:delimiters) {
-					while(str2.contains(b.getWords())) {
-						map.put(str2.indexOf(b.getWords())+startpoint+end, b.getWords());
-						str2 = str2.replace(b.getWords(), " ");
+				for(Vt_word b:delimiters) {
+					while(str2.contains(b.getWord())) {
+						map.put(str2.indexOf(b.getWord())+startpoint+end, b.getWord());
+						str2 = str2.replace(b.getWord(), " ");
 					}
 				}
 				String regex2 = "[^\\s]+";
@@ -115,10 +115,10 @@ public class Analysis {
 		}
 		if(end<sentence.length()) {
 			String str3 = sentence.substring(end);
-			for(Basic_word b:delimiters) {
-				while(str3.contains(b.getWords())) {
-					map.put(str3.indexOf(b.getWords())+startpoint+end, b.getWords());
-					str3 = str3.replace(b.getWords(), " ");
+			for(Vt_word b:delimiters) {
+				while(str3.contains(b.getWord())) {
+					map.put(str3.indexOf(b.getWord())+startpoint+end, b.getWord());
+					str3 = str3.replace(b.getWord(), " ");
 				}
 			}
 			String regex2 = "[^\\s]+";
@@ -132,7 +132,7 @@ public class Analysis {
 	}
 	
 	
-	public List<Basic_word> main(String paragragh) {
+	public List<Vt_word> main(String paragragh) {
 		initialize();
 		Map<? extends String, ? extends String> map = getAllContants(paragragh);
 		 Map<String, String> resultMap = Myutils.sortMapByKey(map); 
@@ -142,8 +142,8 @@ public class Analysis {
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(str);
 			Constructor c = null;
-			Basic_word bw = new Basic_word();
-			bw.setWords(str);
+			Vt_word bw = new Vt_word();
+			bw.setWord(str);
 			if(matcher.matches()) {
 				if(reserveds.contains(bw)) {	//check if reserved
 					bw = new Reserved();
@@ -167,13 +167,13 @@ public class Analysis {
 					c = new DelimiterConstructor();
 				}
 			}
-			bw.setWords(str);
+			bw.setWord(str);
 			bw.setType();
-			allwords.add(bw);
+			allWord.add(bw);
 			if(c!=null) {
 				c.add(str);
 			}
 		}
-		return allwords;
+		return allWord;
 	}
 }

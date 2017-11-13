@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import compiler.lexical_analysis.constructor.Constructor;
-import compiler.lexical_analysis.word.Basic_word;
-import compiler.lexical_analysis.word.Identifier;
+import compiler.pojo.word.Vt.Vt_word;
+import compiler.pojo.word.Vt.type.Identifier;
 
 
 /**
@@ -14,26 +14,26 @@ import compiler.lexical_analysis.word.Identifier;
  */
 public class IdentifierConstructor implements Constructor {
 
-	public static List<Basic_word> wordlist = new ArrayList<>();
+	public static List<Vt_word> wordlist = new ArrayList<>();
 	
 	@Override
-	public List<Basic_word> construct() {
+	public List<Vt_word> construct() {
 		return wordlist;
 	}
 
 	@Override
-	public List<Basic_word> add(String word) {
-		Basic_word bw = new Identifier();
-		bw.setWords(word);
+	public List<Vt_word> add(String word) {
+		Vt_word bw = new Identifier();
+		bw.setWord(word);
 		bw.setType();
 		wordlist.add(bw);
 		return wordlist;
 	}
 
 	@Override
-	public List<Basic_word> remove(String word) {
-		Basic_word bw = new Identifier();
-		bw.setWords(word);
+	public List<Vt_word> remove(String word) {
+		Vt_word bw = new Identifier();
+		bw.setWord(word);
 		bw.setType();
 		if(wordlist.contains(bw)) {
 			wordlist.remove(bw);
