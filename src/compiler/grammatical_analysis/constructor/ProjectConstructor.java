@@ -61,7 +61,7 @@ public class ProjectConstructor {
 		for(Rule_pointer l:list) {
 			String point = l.getPointer();
 			for(Rule r:rlist) {
-				if(point.equals(r.getLeft())) {
+				if(point.equals(r.getLeft().getWord())) {
 					List<Word> rl = r.getRight();
 					Rule_pointer rp = new Rule_pointer();
 					rp.setLeft(r.getLeft());
