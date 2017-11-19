@@ -15,10 +15,16 @@ public class ProjectConstructor {
 	public static List<Connect> clist = ConnectConstructor.getClist();
 	public static List<Rule> rlist = Utils_properties.getRules();
 	
-	public void initialize() {
+	public static List<Project> getProjects() {
+		if(plist.equals(null)) {
+			initialize();
+		}
+		return plist;
+	}
+	private static void initialize() {
 		plist = new ArrayList<>();
 		Project p = new Project();
-		p.setStatus("I0");
+		p.setStatus("0");
 		List<Rule_pointer> rplist = new ArrayList<>();
 		for(Rule r:rlist) {
 			Rule_pointer rp = new Rule_pointer();
@@ -32,7 +38,7 @@ public class ProjectConstructor {
 		plist.add(p);
 	}
 	
-	public Project CreateNextProject(Connect c) {
+	public static Project CreateNextProject(Connect c) {
 		Project p = new Project();
 		p.setStatus(c.getFollow());
 		List<Rule_pointer> folist = new ArrayList<>();
@@ -54,7 +60,7 @@ public class ProjectConstructor {
 		return p;
 	}
 	
-	private Project CompliteProject(Project p) {
+	private static Project CompliteProject(Project p) {
 		List<Rule_pointer> list = p.getRules();
 		List<Rule> rlist = Utils_properties.getRules();
 		boolean change = false;

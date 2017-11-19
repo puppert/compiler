@@ -11,7 +11,7 @@ public class ConnectConstructor {
 	public static void initialize() {
 		clist = new ArrayList<>();
 	}
-	public Connect CreateConnect(String front,String follow,String sign) {
+	public static Connect CreateConnect(String front,String follow,String sign) {
 		if(clist.equals(null)) {
 			initialize();
 		}
@@ -19,7 +19,9 @@ public class ConnectConstructor {
 		c.setFollow(follow);
 		c.setFront(front);
 		c.setSign(sign);
-		clist.add(c);
+		if(!clist.contains(c)) {
+			clist.add(c);
+		}
 		return c;
 	}
 	
