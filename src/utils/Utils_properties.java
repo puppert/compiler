@@ -59,7 +59,7 @@ public class Utils_properties {
 	}
 	
 	private static void loadRule() {
-		Analysis a = new Analysis();
+//		Analysis a = new Analysis();
 		try {
 			 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("rule.txt"))));
 			 String line = null;
@@ -69,7 +69,8 @@ public class Utils_properties {
 				 Vn_word left = new Vn_word();
 				 left.setWord(str[0]);
 				 r.setLeft(left);
-				 Map<String, String> m = a.getAllContants(str[1]);
+//				 Map<String, String> m = a.getAllContants(str[1]);
+				 Map<String,String> m =Myutils.spilitRule(str[1]);
 				 Map<String, String> resultMap = Myutils.sortMapByKey(m); 
 				 List<Word> list = new ArrayList<>();
 				 for(Map.Entry<String, String> entry : resultMap.entrySet()) {
