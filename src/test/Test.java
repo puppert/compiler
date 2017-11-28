@@ -1,24 +1,22 @@
 package test;
 
-import java.util.List;
+import java.util.Map;
 
-import compiler.lexical_analysis.Analysis;
-import compiler.pojo.word.Vt.Vt_word;
+import compiler.grammatical_analysis.constructor.AnalysisTableConstructor;
 
 public class Test {
 
 	public static void main(String[] args) {
-//		Analysis a = new Analysis();
-//		String s  = "int main()\r\n" + 
-//				"{\r\n" + 
-//				"    printf(\"Hello, World! \\n\");\r\n" + 
-//				" \r\n" + 
-//				"    return 1+2;\r\n" + 
-//				"}";
-//		List<Vt_word> r = a.main(s);
-//		for(int i = 0;i<r.size();i++) {
-//			System.out.println(r.get(i));
+//		ProjectFamily pf = ProjectFamilyConstructor.getProjectFamily();
+//		for(Connect c:pf.getConnects()) {
+//			System.out.println(c);
 //		}
+//		for(Project p:pf.getProjects()) {
+//			System.out.println(p);
+//		}
+		 Map<String[],String> m = AnalysisTableConstructor.getTable();
+		 for(Map.Entry<String[], String> entry:m.entrySet()) {
+			 System.out.println("["+entry.getKey()[0]+","+entry.getKey()[1]+"]"+"...."+entry.getValue());
+		 }
 	}
-
 }

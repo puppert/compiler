@@ -62,5 +62,9 @@ public class Rule_pointer extends Rule {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Rule_pointer [pointer=" + pointer + ", symbol=" + symbol + ", left=" + left + ", right=" + right + "]";
+	}
 	
 }

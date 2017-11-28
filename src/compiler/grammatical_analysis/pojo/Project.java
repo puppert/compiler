@@ -55,4 +55,9 @@ public class Project {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Project [status=" + status + ", rules=" + rules + "]";
+	}
+	
 }

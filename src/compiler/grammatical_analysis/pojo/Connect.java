@@ -42,6 +42,7 @@ public class Connect {
 		return result;
 	}
 	@Override
+	//只比较前置和关键词
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -53,8 +54,7 @@ public class Connect {
 		if (follow == null) {
 			if (other.follow != null)
 				return false;
-		} else if (!follow.equals(other.follow))
-			return false;
+		} 
 		if (front == null) {
 			if (other.front != null)
 				return false;
@@ -67,4 +67,10 @@ public class Connect {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Connect [front=" + front + ", follow=" + follow + ", sign=" + sign + "]";
+	}
+	
+	
 }

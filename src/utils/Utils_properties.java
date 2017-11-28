@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import compiler.grammatical_analysis.pojo.Rule;
-import compiler.lexical_analysis.Analysis;
 import compiler.pojo.word.Word;
 import compiler.pojo.word.Vn.Vn_word;
 
@@ -54,6 +53,16 @@ public class Utils_properties {
 	public static List<Rule> getRules(){
 		if(grammer_pro.isEmpty()) {
 			loadRule();
+			Rule sr = new Rule();
+			Vn_word v = new Vn_word();
+			v.setWord("<S'>");
+			sr.setLeft(v);
+			List<Word> wl = new ArrayList<>();
+			Word w = new Word();
+			w.setWord("<S>");
+			wl.add(w);
+			sr.setRight(wl);
+			grammer_pro.add(0, sr);
 		}
 		return grammer_pro;
 	}
@@ -64,22 +73,25 @@ public class Utils_properties {
 			 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("rule.txt"))));
 			 String line = null;
 			 while((line = br.readLine()) != null) {
-				 Rule r = new Rule();
 				 String[] str = line.split("->");
 				 Vn_word left = new Vn_word();
 				 left.setWord(str[0]);
-				 r.setLeft(left);
-//				 Map<String, String> m = a.getAllContants(str[1]);
-				 Map<String,String> m =Myutils.spilitRule(str[1]);
-				 Map<String, String> resultMap = Myutils.sortMapByKey(m); 
-				 List<Word> list = new ArrayList<>();
-				 for(Map.Entry<String, String> entry : resultMap.entrySet()) {
-					 Word w = new Word();
-					 w.setWord(entry.getValue());
-					 list.add(w);
+				 String[] rules = str[1].split("/\\|");
+				 for(int i =0;i<rules.length;i++) {
+					 Rule r = new Rule();
+					 r.setLeft(left);
+//					 Map<String, String> m = a.getAllContants(str[1]);
+					 Map<String,String> m = Myutils.spilitRule(rules[i]);
+					 Map<String, String> resultMap = Myutils.sortMapByKey(m); 
+					 List<Word> list = new ArrayList<>();
+					 for(Map.Entry<String, String> entry : resultMap.entrySet()) {
+						 Word w = new Word();
+						 w.setWord(entry.getValue());
+						 list.add(w);
+					 }
+					 r.setRight(list);
+					 grammer_pro.add(r);
 				 }
-				 r.setRight(list);
-				 grammer_pro.add(r);
 			 }
 			 br.close();
 		} catch (FileNotFoundException e) {

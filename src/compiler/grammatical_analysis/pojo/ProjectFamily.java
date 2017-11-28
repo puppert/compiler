@@ -1,35 +1,37 @@
 package compiler.grammatical_analysis.pojo;
 
+import java.util.List;
+
 public class ProjectFamily {
-	Project p = new Project();
-	Connect c = new Connect();
+	private List<Project> projects;
+	private List<Connect> connects;
 	public ProjectFamily() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProjectFamily(Project p, Connect c) {
+	public ProjectFamily(List<Project> projects, List<Connect> connects) {
 		super();
-		this.p = p;
-		this.c = c;
+		this.projects = projects;
+		this.connects = connects;
 	}
-	public Project getP() {
-		return p;
+	public List<Project> getProjects() {
+		return projects;
 	}
-	public void setP(Project p) {
-		this.p = p;
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
-	public Connect getC() {
-		return c;
+	public List<Connect> getConnects() {
+		return connects;
 	}
-	public void setC(Connect c) {
-		this.c = c;
+	public void setConnects(List<Connect> connects) {
+		this.connects = connects;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((c == null) ? 0 : c.hashCode());
-		result = prime * result + ((p == null) ? 0 : p.hashCode());
+		result = prime * result + ((connects == null) ? 0 : connects.hashCode());
+		result = prime * result + ((projects == null) ? 0 : projects.hashCode());
 		return result;
 	}
 	@Override
@@ -41,16 +43,18 @@ public class ProjectFamily {
 		if (getClass() != obj.getClass())
 			return false;
 		ProjectFamily other = (ProjectFamily) obj;
-		if (c == null) {
-			if (other.c != null)
+		if (connects == null) {
+			if (other.connects != null)
 				return false;
-		} else if (!c.equals(other.c))
+		} else if (!connects.equals(other.connects))
 			return false;
-		if (p == null) {
-			if (other.p != null)
+		if (projects == null) {
+			if (other.projects != null)
 				return false;
-		} else if (!p.equals(other.p))
+		} else if (!projects.equals(other.projects))
 			return false;
 		return true;
 	}
+	
+	
 }

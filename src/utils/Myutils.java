@@ -8,9 +8,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import compiler.pojo.word.Word;
-import compiler.pojo.word.Vn.Vn_word;
-
 public class Myutils {
 	public static List<String> getSimpleRule(String rules,String regex){
 		String[] rule = rules.split(regex);
@@ -40,6 +37,7 @@ public class Myutils {
     }
     
     public static Map<String,String> spilitRule(String rule){
+    	rule = rule.trim();
     	Map<String,String> m = new TreeMap<>();
     	String VnRegex = "<[a-zA-Z0-9_]+>";
     	Pattern VnP = Pattern.compile(VnRegex);
@@ -59,14 +57,14 @@ public class Myutils {
     	    		vstart = VtM.start();
     	    		if(vstart!=vend) {
     	    			String symbol = Vts.substring(vend, vstart);
-    	    			m.put(String.valueOf(vend), symbol);
+    	    			m.put(String.valueOf(vend+end), symbol);
     	    		}
-    	    		m.put(String.valueOf(vstart), VtM.group());
+    	    		m.put(String.valueOf(vstart+end), VtM.group());
     	    		vend = VtM.end();
     	    	}
     	    	if(vend<Vts.length()) {
     	    		String last = Vts.substring(vend);
-    	    		m.put(String.valueOf(vend), last);
+    	    		m.put(String.valueOf(vend+end), last);
     	    	}
     		}
     		m.put(String.valueOf(start), VnM.group());

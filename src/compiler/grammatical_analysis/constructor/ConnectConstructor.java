@@ -26,7 +26,7 @@ public class ConnectConstructor {
 	}
 	
 	public static List<Connect> getClist(){
-		if(clist.equals(null)) {
+		if(clist == null) {
 			initialize();
 		}
 		return clist;

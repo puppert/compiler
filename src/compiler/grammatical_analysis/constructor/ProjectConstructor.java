@@ -16,7 +16,7 @@ public class ProjectConstructor {
 	public static List<Rule> rlist = Utils_properties.getRules();
 	
 	public static List<Project> getProjects() {
-		if(plist.equals(null)) {
+		if(plist == null) {
 			initialize();
 		}
 		return plist;
@@ -48,8 +48,7 @@ public class ProjectConstructor {
 				List<Rule_pointer> frlist = front.getRules();
 				for(Rule_pointer r:frlist) {
 					if(r.getPointer().equals(c.getSign())) {
-						RuleConstructor rc = new RuleConstructor();
-						Rule_pointer newr = rc.ChangeSign(r, r.getPointer());
+						Rule_pointer newr = RuleConstructor.ChangeSign(r, r.getPointer());
 						folist.add(newr);
 					}
 				}

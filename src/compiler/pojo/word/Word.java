@@ -45,6 +45,11 @@ public class Word {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Word [word=" + word + "]";
+	}
 	
 	
 }
