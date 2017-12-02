@@ -17,11 +17,11 @@ import utils.Utils_properties;
  *
  */
 public class AnalysisTableConstructor {
-	static private Map<String[],String> Table = new HashMap<String[],String>();//第一个是横轴，第二个是纵轴
+	static private Map<String, String> Table = new HashMap<String,String>();//第一个是横轴，第二个是纵轴
 	static ProjectFamily pf = ProjectFamilyConstructor.getProjectFamily();
 	static List<Rule> rules = Utils_properties.getRules();
 	
-	public static Map<String[],String> getTable() {
+	public static Map<String, String> getTable() {
 		if(Table.isEmpty()) {
 			setTable();
 		}
@@ -35,11 +35,9 @@ public class AnalysisTableConstructor {
 			Project p = pros.get(i);
 			List<Rule_pointer> rps = p.getRules();
 			for(Rule_pointer rp:rps) {
-				if(rp.getLeft().getWord().equals("<S'>")) {
-					if(rp.getPointer().equals("")){
-						String[] s = new String[] {p.getStatus(),"#"};
+				if(rp.getLeft().getWord().equals("<S'>")&&rp.getPointer().equals("")){
+						String s = p.getStatus()+":"+"#";
 						Table.put(s, "acc");
-					}
 				}
 				else if(rp.getPointer().equals("")) {
 					/**
@@ -49,7 +47,7 @@ public class AnalysisTableConstructor {
 						Rule r = rules.get(j);
 						if(r.getLeft().getWord().equals(rp.getLeft().getWord())) {
 							if(r.getRight().equals(rp.getRight())) {
-								String[] s = new String[] {p.getStatus(),r.getLeft().getWord()};
+								String s = p.getStatus()+":"+rp.getSymbol().trim();
 								Table.put(s, "r"+j);
 							}
 						}
@@ -57,8 +55,8 @@ public class AnalysisTableConstructor {
 				}else {
 					for(Connect c:cons) {
 						if(c.getFront().equals(p.getStatus())) {
-							if(c.getSign().equals(rp.getPointer())) {
-								String[] s = new String[] {p.getStatus(),c.getSign()};
+							if(c.getSign().trim().equals(rp.getPointer().trim())) {
+								String s = p.getStatus()+":"+c.getSign().trim();
 								Table.put(s, "S"+c.getFollow());
 							}
 						}

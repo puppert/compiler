@@ -26,15 +26,16 @@ public class ProjectConstructor {
 		Project p = new Project();
 		p.setStatus("0");
 		List<Rule_pointer> rplist = new ArrayList<>();
-		for(Rule r:rlist) {
-			Rule_pointer rp = new Rule_pointer();
-			rp.setLeft(r.getLeft());
-			rp.setRight(r.getRight());
-			rp.setPointer(r.getRight().get(0).getWord());
-			rp.setSymbol("#");
-			rplist.add(rp);
-		}
+		Rule_pointer rp = new Rule_pointer();
+		Rule r = rlist.get(0);
+		rp.setLeft(r.getLeft());
+		rp.setRight(r.getRight());
+		rp.setPointer(r.getRight().get(0).getWord());
+		rp.setSymbol("#");
+		rplist.add(rp);
 		p.setRules(rplist);
+		p = CompliteProject(p);
+		
 		plist.add(p);
 	}
 	
@@ -62,7 +63,9 @@ public class ProjectConstructor {
 	private static Project CompliteProject(Project p) {
 		List<Rule_pointer> list = p.getRules();
 		List<Rule> rlist = Utils_properties.getRules();
+		List<Rule_pointer> newlist = new ArrayList<>();
 		boolean change = false;
+		
 		for(Rule_pointer l:list) {
 			String point = l.getPointer();
 			for(Rule r:rlist) {
@@ -72,13 +75,23 @@ public class ProjectConstructor {
 					rp.setLeft(r.getLeft());
 					rp.setRight(rl);
 					rp.setPointer(rl.get(0).getWord());
-					if(!list.contains(rp)) {
-						list.add(rp);
+					int i = l.getRight().indexOf(new Word(point));
+					if(i+1<l.getRight().size()) {
+						if(!l.getRight().get(i+1).getWord().matches("<[a-zA-Z0-9_]+>")) {
+							rp.setSymbol(l.getRight().get(i+1).getWord());
+						}
+					}else {
+							rp.setSymbol(l.getSymbol());
+					}
+					if(!list.contains(rp)&&!newlist.contains(rp)) {
+						newlist.add(rp);
 						change = true;
 					}
 				}
 			}
 		}
+		list.addAll(newlist);
+		p.setRules(list);
 		if(change) {
 			p = CompliteProject(p);
 		}

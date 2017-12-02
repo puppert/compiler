@@ -75,7 +75,7 @@ public class Utils_properties {
 			 while((line = br.readLine()) != null) {
 				 String[] str = line.split("->");
 				 Vn_word left = new Vn_word();
-				 left.setWord(str[0]);
+				 left.setWord(str[0].trim());
 				 String[] rules = str[1].split("/\\|");
 				 for(int i =0;i<rules.length;i++) {
 					 Rule r = new Rule();
@@ -86,7 +86,7 @@ public class Utils_properties {
 					 List<Word> list = new ArrayList<>();
 					 for(Map.Entry<String, String> entry : resultMap.entrySet()) {
 						 Word w = new Word();
-						 w.setWord(entry.getValue());
+						 w.setWord(entry.getValue().trim());
 						 list.add(w);
 					 }
 					 r.setRight(list);

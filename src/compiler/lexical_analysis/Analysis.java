@@ -132,7 +132,7 @@ public class Analysis {
 	}
 	
 	
-	public List<Vt_word> main(String paragragh) {
+	public List<Vt_word> Analyze(String paragragh) {
 		initialize();
 		Map<? extends String, ? extends String> map = getAllContants(paragragh);
 		 Map<String, String> resultMap = Myutils.sortMapByKey(map); 
